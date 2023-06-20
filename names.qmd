@@ -1,0 +1,31 @@
+---
+title: "Names"
+format: html
+execute: 
+  echo: false
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+x <- read_csv("data/i_names.csv", show_col_types = FALSE)
+```
+
+```{r}
+summary(x)
+```
+
+```{r}
+x |>
+  summarize(num_per_mil = sum(n),
+              .by = c(year, sex)) |>
+  filter (year >= 1900) |>
+ggplot(aes(x=year, y = num_per_mil, group= sex, fill = sex)) +
+  geom_area()
+  
+```
+
+
